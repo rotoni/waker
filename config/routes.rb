@@ -39,7 +39,7 @@ Rails.application.routes.draw do
 
   resources :maintenances
 
-  resources :users, only: [:index, :show, :destroy] do
+  resources :users, only: [:index, :show, :destroy, :new, :create] do
     member do
       patch 'activation'
       patch 'deactivation'
