@@ -87,3 +87,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
+
+Rails.application.routes.default_url_options[:host] = ENV["RAILS_DEFAULT_URL_HOST"] if ENV["RAILS_DEFAULT_URL_HOST"].present?
+Rails.application.routes.default_url_options[:protocol] = ENV["RAILS_DEFAULT_URL_PROTOCOL"] if ENV["RAILS_DEFAULT_URL_PROTOCOL"].present?

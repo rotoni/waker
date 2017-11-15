@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
     before_action :login_required
   end
 
+  if ENV["BASIC_AUTH_USER"]
+    http_basic_authenticate_with :name => ENV['BASIC_AUTH_USER'], :password => ENV['BASIC_AUTH_PASSWORD']
+  end
+
   private
 
   def login_required
