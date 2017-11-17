@@ -1,19 +1,19 @@
 version: '3'
 services:
   waker:
-    build: .
+    image: uu4k/waker
     ports:
       - "8080:5000"
     environment:
       RAILS_ENV: production
       REDIS_HOST: redis
-      # RAILS_DEFAULT_URL_HOST: example.com:8080
-      # RAILS_DEFAULT_URL_PROTOCOL: http
+      RAILS_DEFAULT_URL_HOST: xxx.xxx.xxx.xxx:8080
+      RAILS_DEFAULT_URL_PROTOCOL: http
       RAILS_DATABASE_HOST: mysql
       RAILS_DATABASE_NAME: waker
       RAILS_DATABASE_USERNAME: waker
       RAILS_DATABASE_PASSWORD: waker
-      RAILS_SERVE_STATIC_FILES: 1
+      RAILS_SERVER_STATIC_FILES: 1
       SECRET_KEY_BASE: 26b9dcdbfb7e762c12f80dd165292142aa96f87e7c134a7d42453417e17208cd8a83897b341e8bb703619230d4c1152c0784e05095242e07f3d18d7d5043ca2f
       # BASIC_AUTH_USER: sample
       # BASIC_AUTH_PASSWORD: sample
