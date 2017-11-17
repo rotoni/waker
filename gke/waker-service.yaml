@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: waker
+  name: waker
+spec:
+  type: LoadBalancer
+  # for static IP
+  # loadBalancerIP: xxx.xxx.xxx.xxx
+  ports:
+    - port: 8080
+      targetPort: 5000
+      protocol: TCP
+  selector:
+    app: waker

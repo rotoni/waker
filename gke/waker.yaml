@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: waker
+  labels:
+    app: waker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: waker
+  template:
+    metadata:
+      labels:
+        app: waker
+    spec:
+      containers:
+        - image: uu4k/waker
+          name: waker
+          env:
+            - name: RAILS_ENV
+              value: production
+            - name: REDIS_HOST
+              value: localhost
+            - name: RAILS_DEFAULT_URL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: waker
+                  key: default_url_host
+            - name: RAILS_DATABASE_HOST
+              value: mysql
+            - name: RAILS_DATABASE_NAME
+              value: waker
+            - name: RAILS_DATABASE_USERNAME
+              value: waker
+            - name: RAILS_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: waker_password
+            - name: RAILS_SERVER_STATIC_FILES
+              value: "1"
+            - name: SECRET_KEY_BASE
+              value: 26b9dcdbfb7e762c12f80dd165292142aa96f87e7c134a7d42453417e17208cd8a83897b341e8bb703619230d4c1152c0784e05095242e07f3d18d7d5043ca2f
+            - name: BASIC_AUTH_USER
+              valueFrom:
+                secretKeyRef:
+                  name: waker
+                  key: basic_auth_user
+            - name: BASIC_AUTH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: waker
+                  key: basic_auth_password
+          ports:
+            - containerPort: 5000
+              name: waker
+        - image: redis:latest
+          name: redis
